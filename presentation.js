@@ -7,6 +7,7 @@ var questionNum = {
   anime: 1,
   geography: 1,
   food: 1,
+  food2: 1,  
   cat4: 1,
   cat5: 1,
 };
