@@ -6,14 +6,14 @@ var answerDiv = document.getElementById("answer");
 var questionNum = {
   anime: 1,
   geography: 1,
-  food: 1,
-  food2: 1,  
+  food: 1, 
   cat4: 1,
   cat5: 1,
 };
 
 document.querySelectorAll('.category').forEach(function(b) {
   b.addEventListener('click', function() {
+
     if (b.className.indexOf('disabled') > -1) {
       return;
     }
@@ -22,7 +22,10 @@ document.querySelectorAll('.category').forEach(function(b) {
     if (q === null) {
       return;
     }
-    var nextQ = document.getElementById(b.id + '-question-' + questionNum[b.id] + 1);
+
+    // check whether next question exists
+    var questionIndex = questionNum[b.id] + 1;
+    var nextQ = document.getElementById(b.id + '-question-' + questionIndex); 
     if (nextQ === null) {
       b.className += ' disabled';
     }
@@ -43,6 +46,7 @@ document.querySelectorAll('.category').forEach(function(b) {
       }
     }, 1000);
 
+    // go to next question
     questionNum[b.id]++;
   });
 });
