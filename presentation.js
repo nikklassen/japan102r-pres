@@ -10,9 +10,11 @@ var questionNum = {
   ghibli: 1,
 };
 
-function showAnswer(questionType, answerDiv, answerHtml) {
+function showAnswer(questionType, questionDiv, answerDiv, answerHtml) {
   function cb() {
     document.removeEventListener('click', cb);
+    questionDiv.style.display = 'none';
+    answerDiv.style.display = 'block';
     answerDiv.innerHTML = ANSWER_TIMER;
 
     var remainingSeconds = ANSWER_TIMER - 1;
@@ -25,10 +27,10 @@ function showAnswer(questionType, answerDiv, answerHtml) {
         clearInterval(timer);
       }
     }, 1000);
-
-    questionNum[questionType]++;
   }
+
   document.addEventListener('click', cb);
+  questionNum[questionType]++;
 }
 
 document.querySelectorAll('.category').forEach(function(b) {
@@ -53,9 +55,11 @@ document.querySelectorAll('.category').forEach(function(b) {
     var a = document.getElementById(b.id + '-answer-' + questionNum[b.id]);
 
     questionDiv.innerHTML = q.innerHTML;
+    questionDiv.style.display = 'block';
+    answerDiv.style.display = 'none';
 
     setTimeout(function() {
-      showAnswer(b.id, answerDiv, a.innerHTML);
+      showAnswer(b.id, questionDiv, answerDiv, a.innerHTML);
     }, 1);
   });
 });

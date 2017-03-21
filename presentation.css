@@ -2,6 +2,14 @@ body, html {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+
+    background: url(FreeVector-Bright-Starburst.jpg) no-repeat center fixed;
+    background-size: cover;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 .container {
@@ -10,22 +18,30 @@ body, html {
 }
 
 ul {
+    width: 100%;
     list-style: none;
     text-align: center;
     height: 3.5rem;
+    margin: 0;
+    padding: 0.5rem;
 }
 
 .category {
-    width: 200px;
-    padding: 0;
+    width: 250px;
     height: 1.5em;
+
+    padding: 0;
+    margin-right: 20px;
+
     line-height: 1.5em;
     font-size: 2em;
-    background: lightblue;
-    display: inline-block;
     vertical-align: middle;
     text-align: center;
-    margin-right: 20px;
+
+    background: lightblue;
+    border: 1px solid black;
+
+    display: inline-block;
     cursor: pointer;
 }
 
@@ -34,23 +50,25 @@ ul {
 }
 
 #detail {
-    height: 40%;
+    height: 80%; /* fallback value */
     height: calc(100% - 3.5rem);
-
     position: relative;
     text-align: center;
     vertical-align: middle;
     font-size: 3em;
+    padding: 20px;
 }
 
-#question {
-    width: 100%;
-    height: 50%;
+#question, #answer {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto 30px auto;
+    background: white;
+    border: 1px solid black;
 }
 
 #answer {
-    width: 100%;
-    height: 50%;
+    display: none;
 }
 
 #data {
