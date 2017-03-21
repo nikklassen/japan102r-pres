@@ -6,10 +6,30 @@ var answerDiv = document.getElementById("answer");
 var questionNum = {
   anime: 1,
   geography: 1,
-  food: 1, 
-  cat4: 1,
-  cat5: 1,
+  food: 1,
+  ghibli: 1,
 };
+
+function showAnswer(questionType, answerDiv, answerHtml) {
+  function cb() {
+    document.removeEventListener('click', cb);
+    answerDiv.innerHTML = ANSWER_TIMER;
+
+    var remainingSeconds = ANSWER_TIMER - 1;
+    var timer = setInterval(function() {
+      if (remainingSeconds > 0) {
+        answerDiv.innerHTML = remainingSeconds;
+        remainingSeconds -= 1;
+      } else {
+        answerDiv.innerHTML = answerHtml;
+        clearInterval(timer);
+      }
+    }, 1000);
+
+    questionNum[questionType]++;
+  }
+  document.addEventListener('click', cb);
+}
 
 document.querySelectorAll('.category').forEach(function(b) {
   b.addEventListener('click', function() {
@@ -33,20 +53,9 @@ document.querySelectorAll('.category').forEach(function(b) {
     var a = document.getElementById(b.id + '-answer-' + questionNum[b.id]);
 
     questionDiv.innerHTML = q.innerHTML;
-    answerDiv.innerHTML = ANSWER_TIMER;
 
-    var remainingSeconds = ANSWER_TIMER - 1;
-    var timer = setInterval(function() {
-      if (remainingSeconds > 0) {
-        answerDiv.innerHTML = remainingSeconds;
-        remainingSeconds -= 1;
-      } else {
-        answerDiv.innerHTML = a.innerHTML;
-        clearInterval(timer);
-      }
-    }, 1000);
-
-    // go to next question
-    questionNum[b.id]++;
+    setTimeout(function() {
+      showAnswer(b.id, answerDiv, a.innerHTML);
+    }, 1);
   });
 });
