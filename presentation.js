@@ -17,8 +17,13 @@ function showAnswer(questionType, questionDiv, answerDiv, answerHtml) {
     document.removeEventListener('click', cb, true);
     questionDiv.style.display = 'none';
     answerDiv.style.display = 'block';
-    answerDiv.innerHTML = ANSWER_TIMER;
 
+    if (e.shiftKey) {
+        answerDiv.innerHTML = answerHtml;
+        return;
+    }
+
+    answerDiv.innerHTML = ANSWER_TIMER;
     var remainingSeconds = ANSWER_TIMER - 1;
     var timer = setInterval(function() {
       if (remainingSeconds > 0) {

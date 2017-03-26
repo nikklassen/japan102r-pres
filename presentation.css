@@ -6,6 +6,8 @@ body, html {
 
     background: url(FreeVector-Bright-Starburst.jpg) no-repeat center fixed;
     background-size: cover;
+
+    user-select: none;
 }
 
 * {
