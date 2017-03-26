@@ -83,13 +83,12 @@ ul {
     margin-left: auto;
     margin-right: auto;
 }
-#question img{
+#question .bucket img {
     float: left;
     width: 40%;
-    height: 100%;    
 }
 
-.img-right{
+.img-right {
     margin-left:45%;
     margin-top:20px;
     width: 40%;

@@ -11,8 +11,10 @@ var questionNum = {
 };
 
 function showAnswer(questionType, questionDiv, answerDiv, answerHtml) {
-  function cb() {
-    document.removeEventListener('click', cb);
+  function cb(e) {
+    e.stopPropagation();
+
+    document.removeEventListener('click', cb, true);
     questionDiv.style.display = 'none';
     answerDiv.style.display = 'block';
     answerDiv.innerHTML = ANSWER_TIMER;
@@ -29,12 +31,13 @@ function showAnswer(questionType, questionDiv, answerDiv, answerHtml) {
     }, 1000);
   }
 
-  document.addEventListener('click', cb);
+  document.addEventListener('click', cb, true);
   questionNum[questionType]++;
 }
 
 document.querySelectorAll('.category').forEach(function(b) {
-  b.addEventListener('click', function() {
+  b.addEventListener('click', function(e) {
+    e.stopPropagation();
 
     if (b.className.indexOf('disabled') > -1) {
       return;
@@ -47,7 +50,7 @@ document.querySelectorAll('.category').forEach(function(b) {
 
     // check whether next question exists
     var questionIndex = questionNum[b.id] + 1;
-    var nextQ = document.getElementById(b.id + '-question-' + questionIndex); 
+    var nextQ = document.getElementById(b.id + '-question-' + questionIndex);
     if (nextQ === null) {
       b.className += ' disabled';
     }
@@ -61,5 +64,5 @@ document.querySelectorAll('.category').forEach(function(b) {
     setTimeout(function() {
       showAnswer(b.id, questionDiv, answerDiv, a.innerHTML);
     }, 1);
-  });
+  }, true);
 });
